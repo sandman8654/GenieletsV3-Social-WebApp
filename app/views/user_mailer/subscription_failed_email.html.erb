@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="invoice-header">
+      <h3> Receipt for Payment Failed from Genielets </h3>
+    </div>
+    <div class="span4 well" style="float: left;">
+      <table class="invoice-head">
+        <tbody>
+        <tr>
+          <td><strong>From:</strong></td>
+        </tr>
+        <tr>
+          <td> GenieBytes Limited</td>
+        </tr>
+        <tr>
+          <td> Office 380</td>
+        </tr>
+        <tr>
+          <td> 27 Colmore Row</td>
+        </tr>
+        <tr>
+          <td> Birmingham </td>
+        </tr>
+        <tr>
+          <td> B3 2EW</td>
+        </tr>
+        <tr>
+          <td> Company Number: 9079102</td>
+        </tr>
+        <tr>
+          <td> Customer Services: CS@GenieLets.com
+          </td>
+        </tr>
+        <tr>
+          <td> Billing: Accounts@GenieLets.com</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="span4 well" style="float: left; margin-left: 20px;">
+      <table class="invoice-head">
+        <tbody>
+        <tr>
+          <td><strong>To:</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Landlord Name</strong></td>
+          <td><%= @landlord.name %></td>
+        </tr>
+        <tr>
+          <td><strong>LandLord Address</strong></td>
+          <td><%= @landlord.address %></td>
+        </tr>
+        <tr>
+          <td><strong>LandLord Email Address</strong></td>
+          <td><%= @landlord.email %></td>
+        </tr>
+        <tr>
+          <td><%= @landlord.primary_phone %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="clear: both;"></div>
+    <br/><br/>
+    <div class="span4 well">
+      <table class="invoice-head">
+        <tbody>
+        <tr>
+          <td class="pull-right"><strong>Invoice Id: </strong></td>
+          <td> #<%= @invoice[:id] %></td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Plan: </strong></td>
+          <td> <%= @invoice[:plan] %></td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Description: </strong></td>
+          <td> <%= @invoice[:description] %></td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Date:</strong></td>
+          <td>  <%= Time.now.strftime("Printed on %m/%d/%Y") %> </td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Amount:</strong></td>
+          <td> <%= number_to_currency(@invoice[:amount], unit: "£")  + @invoice[:currency] + '/' +@invoice[:interval] %> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

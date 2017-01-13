@@ -1,0 +1,34 @@
+= content_for :title, "Genielets Sign up, no credit card required, free 3 month trial "
+= content_for :description, "Sign up here, we are currently offering a free 3 month trial, no credit card required to sign up, try it now"
+.box-register
+  %h3 Sign Up
+  %p
+    Enter your personal details below:
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render 'devise/shared/errors'
+    %fieldset
+      .form-group
+        %div#signup-type
+          %label.radio-inline
+            = f.radio_button :user_type, User::LANDLORD, checked: User::LANDLORD == @type, class: 'grey'
+            Landlord
+          %label.radio-inline
+            = f.radio_button :user_type, User::TENANT, checked: User::TENANT == @type, class: 'grey'
+            Tenant
+      .form-group
+        %span.input-icon
+          %input.form-control{:name => "user[email]", :placeholder => "Email", :type => "email"}
+            %i.fa.fa-envelope
+      .form-group
+        %span.input-icon
+          %input#password.form-control{:name => "user[password]", :placeholder => "Password", :type => "password"}
+            %i.fa.fa-lock
+      .form-group
+        %span.input-icon
+          %input.form-control{:name => "user[password_again]", :placeholder => "Password Again", :type => "password"}
+            %i.fa.fa-lock
+      .form-actions
+        %button.btn.btn-bricky.pull-right{:type => "submit"}
+          Submit
+          %i.fa.fa-arrow-circle-right
+  = render 'devise/shared/links'

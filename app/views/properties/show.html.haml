@@ -1,0 +1,127 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        View Property
+        %small Property Details and Summary
+
+.row
+  .col-sm-12
+    .tab-content
+      .row
+        .col-sm-6
+          .user-left
+            %table.table.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{:colspan => "3"} Property Information
+              %tbody
+                %tr
+                  %td property name:
+                  %td
+                    = @property.name
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td property type:
+                  %td= @property.property_type
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td room count:
+                  %td= @property.room_count
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td rental price:
+                  %td= @property.rental
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td address :
+                  %td= @property.address
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td postcode:
+                  %td= @property.postcode
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td phone:
+                  %td= @property.phone
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td notes:
+                  %td{style: 'width: 70%;'}= @property.notes
+                  %td
+                    = link_to edit_property_path(@property) do
+                      %i.fa.fa-pencil.edit-user-info
+            .pull-right
+              = link_to edit_property_path(@property), class: 'btn btn-info btn-squared btn-lg' do
+                Edit Property
+                %i.fa.fa-eye
+        .col-sm-6
+          %table.table.table-condensed.table-hover
+            %thead
+              %tr
+                %th{:colspan => "3"} Contract Information
+            %tbody
+              %tr
+                %td property name:
+                %td
+                  = @property.name
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td property type:
+                %td= @property.property_type
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td room count:
+                %td= @property.room_count
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td rental price:
+                %td= @property.rental
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td address :
+                %td= @property.address
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td postcode:
+                %td= @property.postcode
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td phone:
+                %td= @property.phone
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td notes:
+                %td{style: 'width: 70%;'}= @property.notes
+                %td
+                  = link_to edit_property_path(@property) do
+                    %i.fa.fa-pencil.edit-user-info
+

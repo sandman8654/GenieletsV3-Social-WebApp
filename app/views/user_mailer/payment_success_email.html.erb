@@ -1,0 +1,13 @@
+<p>
+  Dear <%= @payment.contract.landlord.name %>
+</p>
+
+<p>
+  Your tenant <%= @payment.contract.tenant.name %> has just made a successful payment of
+  £<%= @payment.precise_amount%> via “<%= @payment.paid_type%>” for your property <%= @payment.property.name%>.
+  This rent for this property was due on the <%= @payment.due_date.to_date%>.
+  <br/>
+  You can now check all transactions and outstanding payments via your GenieLets Rent Portal.
+</p>
+
+Regards,

@@ -1,0 +1,8 @@
+%p
+  Dear #{@tenant_info[:name]}
+
+%p
+  We wanted to make you aware that your landlord #{@payment.contract.landlord.name} has successfully marked a payment
+  of £#{@payment.precise_amount} via #{@payment.paid_type} for property #{@payment.property.name}.
+%p
+  The rent for this property is due on #{@payment.due_date}.

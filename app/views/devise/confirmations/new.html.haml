@@ -1,0 +1,16 @@
+.box-login
+  %h3 Resend confirmation instructions
+  %p
+    Please enter your email to send confirmation email.
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = render 'devise/shared/errors'
+    %fieldset
+      .form-group
+        %span.input-icon
+          %input.form-control{:name => "user[email]", :placeholder => "Email", :type => "email", :autofocus => true}
+            %i.fa.fa-user
+      .form-actions
+        %button.btn.btn-bricky.pull-right{:type => "submit"}
+          Resend confirmation instructions
+          %i.fa.fa-arrow-circle-right
+  = render 'devise/shared/links'

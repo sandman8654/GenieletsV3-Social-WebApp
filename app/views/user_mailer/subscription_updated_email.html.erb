@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="invoice-header">
+      <p>Dear <%= @landlord.name %></p>
+      <h3>Thanks for upgrading to the<%= @invoice[:plan] %> on Genielets. </h3>
+    </div>
+    <div class="span4 well">
+      <h4>Here is new subscription plan information</h4>
+      <table class="invoice-head">
+        <tbody>
+        <tr>
+          <td class="pull-right"><strong>Plan: </strong></td>
+          <td> <%= @invoice[:plan] %></td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Description: </strong></td>
+          <td> <%= @invoice[:description] %></td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Date:</strong></td>
+          <td>  <%= Time.now.strftime("Printed on %m/%d/%Y") %> </td>
+        </tr>
+        <tr>
+          <td class="pull-right"><strong>Amount:</strong></td>
+          <td> <%= number_to_currency(@invoice[:amount], unit: "£")+@invoice[:currency]+'/'+@invoice[:interval] %> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

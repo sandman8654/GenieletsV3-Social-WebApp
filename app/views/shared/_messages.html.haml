@@ -1,0 +1,10 @@
+- if flash.count  > 0
+  - class_name = flash.to_hash.keys[0]
+  - class_name = 'success' if class_name == 'notice'
+  - class_name = 'danger' if class_name == 'alert'
+  %div{class: "errorHandler alert alert-#{class_name}"}
+    %button.close{'data-dismiss' => 'alert'}
+      &times;
+    - flash.each do |name, msg|
+      - if msg.is_a?(String)
+        = content_tag :div, msg

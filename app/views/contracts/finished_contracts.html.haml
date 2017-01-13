@@ -1,0 +1,36 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Inactive Contracts
+        %small Manage Contracts
+
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        Finished Contracts
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-refresh{:href => "#"}
+            %i.fa.fa-refresh
+      .panel-body
+        %table#finished-contracts-table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th Property Name
+              %th Room Number
+              %th Rental Amount
+              %th Landlord Name
+              %th Contact Period
+              %th Finished At
+          %tbody
+            - @finished_contracts.each do |p|
+              %tr
+                %td= p.property.name
+                %td= p.room_number
+                %td= p.rental_amount
+                %td= p.landlord.name
+                %td= p.period
+                %td= p.finished_at

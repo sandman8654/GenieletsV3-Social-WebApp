@@ -1,0 +1,16 @@
+.box-forgot
+  %h3 Forget Password?
+  %p
+    Enter your e-mail address below to reset your password.
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = render 'devise/shared/errors'
+    %fieldset
+      .form-group
+        %span.input-icon
+          %input.form-control{:name => "user[email]", :placeholder => "Email", :type => "email"}
+            %i.fa.fa-envelope
+      .form-actions
+        %button.btn.btn-bricky.pull-right{:type => "submit"}
+          Submit
+          %i.fa.fa-arrow-circle-right
+  = render 'devise/shared/links'

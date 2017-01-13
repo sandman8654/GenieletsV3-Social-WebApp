@@ -1,0 +1,92 @@
+.main-navigation.navbar-collapse.collapse
+  .navigation-toggler
+    %i.clip-chevron-left
+    %i.clip-chevron-right
+  %ul.main-navigation-menu
+    %li{class: "#{selected_menu('dashboard', '')}"}
+      = link_to dashboard_path do
+        %i.clip-screen
+        %span.title Dashboard
+        %span.selected
+    %li{class: "#{selected_menu('properties', '')}"}
+      %a{:href => "javascript:void(0)"}
+        %i.clip-home-3
+        %span.title Properties
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        - if landlord?
+          %li{class: "#{selected_menu('properties', 'new')}"}
+            = link_to new_property_path do
+              %span.title Add New Property
+        %li{class: "#{selected_menu('properties', 'index')}"}
+          = link_to properties_path do
+            %span.title List of Properties
+    %li{class: "#{selected_menu('connections', '')}"}
+      %a{:href => "javascript:void(0)"}
+        %i.clip-user-2
+        %small inverse user type #{inverse_user_type}
+        %span.title #{inverse_user_type.pluralize}
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        %li{class: "#{selected_menu('connections', 'new')}"}
+          = link_to add_connection_path do
+            %span.title Add #{inverse_user_type}
+        %li{class: "#{selected_menu('connections', 'index')}"}
+          = link_to connections_path do
+            %span.title List of #{inverse_user_type.pluralize}
+    %li{class: "#{selected_menu('contracts', '')}"}
+      %a{:href => "javascript:void(0)"}
+        %i.clip-pencil
+        %span.title Contracts
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        - if landlord?
+          %li{class: "#{selected_menu('contracts', 'new')}"}
+            = link_to new_contract_path do
+              %span.title Add New Contract
+          %li{class: "#{selected_menu('contracts', 'index')}"}
+            = link_to contracts_path do
+              %span.title List of Contracts
+        - elsif tenant?
+          %li{class: "#{selected_menu('contracts', 'active_contracts')}"}
+            = link_to active_contracts_path do
+              %span.title Active Contracts
+          %li{class: "#{selected_menu('contracts', 'finished_contracts')}"}
+            = link_to finished_contracts_path do
+              %span.title Finished/Inactive Contracts
+    %li{class: "#{selected_menu('payments', '')}"}
+      %a{:href => "javascript:void(0)"}
+        %i.clip-grid-6
+        %span.title Payments
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        %li{class: "#{selected_menu('payments', 'outstanding')}"}
+          = link_to outstanding_payments_path do
+            %span.title Outstanding Payments
+        %li{class: "#{selected_menu('payments', 'paid')}"}
+          = link_to paid_payments_path do
+            %span.title Paid Payments
+    / - if tenant?
+    /   %li{class: "#{selected_menu('private_payments', '')}"}
+    /     = link_to private_payments_path do
+    /       %i.clip-grid-2
+    /       %span.title Private Payments
+    /       %span.selected
+    %li{class: "#{selected_menu('users', '')}"}
+      %a{:href => "javascript:void(0)"}
+        %i.clip-cog-2
+        %span.title Profile Settings
+        %i.icon-arrow
+        %span.selected
+      %ul.sub-menu
+        - if landlord?
+          %li
+            = link_to account_summary_path do
+              %span.title Subscription
+        %li
+          = link_to profile_path do
+            %span.title Edit Profile

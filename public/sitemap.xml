@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://www.genielets.com/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/users/sign_up?type=landlord</loc>
+  <priority>0.60</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/users/sign_up?type=tenant</loc>
+  <priority>0.60</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/users/sign_in</loc>
+  <priority>0.85</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/features</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/pricing</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/instruction</loc>
+  <priority>0.75</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/about</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/rightmove</loc>
+  <priority>0.90</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/testimonials</loc>
+  <priority>0.60</priority>
+</url>
+<url>
+  
+<loc>http://www.genielets.com/vacancies</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/videos</loc>
+  <priority>0.85</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/contactus</loc>
+  <priority>0.86</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/policy</loc>
+  <priority>0.20</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/users/confirmation/new</loc>
+  <priority>0.14</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/users/password/new</loc>
+  <priority>0.14</priority>
+</url>
+<url>
+  <loc>http://www.genielets.com/users/sign_up</loc>
+  <priority>0.64</priority>
+</url>
+</urlset>

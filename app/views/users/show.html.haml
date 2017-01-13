@@ -1,0 +1,159 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Account Summary
+        %small Profile and Subscription Overview
+
+.row
+  .col-sm-12
+    .tab-content
+      .row
+        .col-sm-5.col-md-4
+          .user-left
+            .center
+              %h4 #{@user.name}
+              .user-image
+                .fileupload-new.thumbnail
+                  = image_tag @user.avatar.url(:medium)
+            %table.table.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{:colspan => "3"} Account Information
+              %tbody
+                %tr
+                  %td email:
+                  %td
+                    = link_to @user.email, "mailto:#{@user.email}"
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td phone:
+                  %td #{@user.phone}
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td address:
+                  %td
+                    #{@user.address}
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+            %table.table.table-condensed.table-hover
+              %thead
+                %tr
+                  %th{:colspan => "3"} Company Information
+              %tbody
+                %tr
+                  %td company name:
+                  %td
+                    #{@user.company_name.presence || 'N/A'}
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td company description:
+                  %td #{@user.company_desc.presence || 'N/A'}
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+                %tr
+                  %td vat number:
+                  %td
+                    #{@user.vat_number.presence || 'N/A'}
+                  %td
+                    = link_to profile_path do
+                      %i.fa.fa-pencil.edit-user-info
+        .col-sm-7.col-md-8
+          #pricing_table_example1.row
+            .col-sm-12
+              %h4 Subscription Information
+              %h5
+                %dl.dl-horizontal
+                  %dt Subscription Type:
+                  %dd= @user.subscription_type
+                  %dt Subscribed Date:
+                  %dd= @user.plan_start_date.to_date
+                  %dt Expire Date:
+                  %dd= @user.plan_end_date.to_date
+            - if @user.subscription_type == 'Trial'
+              .col-sm-12
+                %p
+                  %table
+                    %tr
+                      %td
+                        %span.label.label-info NOTE
+                      %td
+                        You are now in trial period and it expires on #{@user.plan_end_date.to_date}. Subscribe now to get the full benefits of GenieLets!
+            .col-sm-12
+              %div{class: "#{subscription_class('Standard')}"}
+                %h3
+                  Standard
+                  %span £3
+                = form_tag charges_path do
+                  = hidden_field_tag "plan_type", "Genielets-Standard"
+                  %button.btn.btn-green{type: "submit"} Choose
+                  %script{src: "https://checkout.stripe.com/checkout.js", style: "display: none;", class: "stripe-button hidden", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "A month's subscription", "data-amount" => "300"}
+              %div{class: "#{subscription_class('Pro')}"}
+                %h3
+                  Pro
+                  %span £5
+                = form_tag charges_path do
+                  = hidden_field_tag "plan_type", "Genielets-Pro"
+                  %button.btn.btn-green{type: "submit"} Choose
+                  %script{src: "https://checkout.stripe.com/checkout.js", style: "display: none;", class: "stripe-button hidden", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "A month's subscription", "data-amount" => "500"}
+              %div{class: "#{subscription_class('Enterprise')}"}
+                %h3
+                  Enterprise
+                  %span £10
+                = form_tag charges_path do
+                  = hidden_field_tag "plan_type", "Genielets-Enterprise"
+                  %button.btn.btn-green{type: "submit"} Choose
+                  %script{src: "https://checkout.stripe.com/checkout.js", style: "display: none;", class: "stripe-button hidden", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "A month's subscription", "data-amount" => "1000"}
+          %br
+          %br
+          %table.table.table-condensed.table-hover
+            %thead
+              %tr
+                %th{:colspan => "3"} Payment Information
+            %tbody
+              %tr
+                %td paypal email:
+                %td
+                  #{@user.paypal_email.presence || 'N/A'}
+                %td
+                  = link_to profile_path do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td bank account number:
+                %td #{@user.bank_account_no.presence || 'N/A'}
+                %td
+                  = link_to profile_path do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td bank name:
+                %td
+                  #{@user.bank_name.presence || 'N/A'}
+                %td
+                  = link_to profile_path do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td bank branch:
+                %td
+                  #{@user.bank_branch.presence || 'N/A'}
+                %td
+                  = link_to profile_path do
+                    %i.fa.fa-pencil.edit-user-info
+              %tr
+                %td currency:
+                %td
+                  #{@user.currency.presence || 'N/A'}
+                %td
+                  = link_to profile_path do
+                    %i.fa.fa-pencil.edit-user-info
+          .pull-right
+            = link_to profile_path, class: 'btn btn-info btn-squared btn-lg' do
+              Edit Profile
+              %i.fa.fa-arrow-circle-right

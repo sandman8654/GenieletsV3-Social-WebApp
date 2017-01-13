@@ -1,0 +1,33 @@
+= form_for @connection, url: create_connection_path, method: :post do |f|
+  .panel.panel-default
+    .panel-heading
+      %i.fa.fa-external-link-square
+      ADD TENANT
+      .panel-tools
+        %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+        %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+          %i.fa.fa-times
+    .panel-body
+      .form-group
+        = f.label :tenant_email, 'Tenant Email', class: 'control-label'
+        = f.email_field :tenant_email, :placeholder => "Tenant Email", class: 'form-control'
+      .form-group
+        = f.label :tenant_first_name, 'First Name', class: 'control-label'
+        = f.text_field :tenant_first_name, :placeholder => "First Name", class: 'form-control'
+      .form-group
+        = f.label :tenant_middle_name, 'Middle Name', class: 'control-label'
+        = f.text_field :tenant_middle_name, :placeholder => "Middle Name", class: 'form-control'
+      .form-group
+        = f.label :tenant_last_name, 'Last Name', class: 'control-label'
+        = f.text_field :tenant_last_name, :placeholder => "Last Name", class: 'form-control'
+      .form-group
+        = f.label :tenant_address, 'Tenant Address', class: 'control-label'
+        = f.text_field :tenant_address, :placeholder => "Tenant Address", class: 'form-control'
+      .form-group
+        = f.label :tenant_phone, 'Tenant Phone', class: 'control-label'
+        = f.text_field :tenant_phone, :placeholder => "Tenant Phone", class: 'form-control'
+      .form-group
+        = f.label :notes, 'Notes', class: 'control-label'
+        = f.text_area :notes, :placeholder => "Notes", rows: 6, class: 'form-control'
+      .pull-right
+        = f.submit 'Add Tenant', class: 'btn btn-primary'

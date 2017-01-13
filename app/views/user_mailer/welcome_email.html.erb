@@ -1,0 +1,13 @@
+<p>
+  Dear <%= @user.email %>
+  <br>
+</p>
+<% if @user.user_type == User::LANDLORD %>
+  <%= content_tag(:p, "We would like to take this opportunity to welcome you to your new GenieLets Rent Portal. Your portal will enable you to easily access your account, allowing you to manage your properties along with rental fees and contracts.
+A bonus feature of this portal is that it allows your tenants to pay you directly via PayPal and it will enable you to check you tenant for to see if there have been any payments made in real time.") %>
+  <%= content_tag(:p, "Regards") %>
+<% elsif @user.user_type == User::TENANT %>
+  <%= content_tag(:p, "We would like to take this opportunity to welcome you to your very own GenieLets Rent Portal. This will allow you to manage the payment of your rental fee as well as giving you access to your contract.
+It will also allow you to connect with your tenant, offering easy access.") %>
+  <%= content_tag(:p, "Regards") %>
+<% end %>

@@ -1,0 +1,9 @@
+- count = model.errors.count unless model.nil?
+- if count > 0
+  .alert.alert-block.alert-danger.fade.in
+    %button.close{'data-dismiss' => 'alert'}
+      &times;
+    %h4.alert-heading
+      %i.fa.fa-times-circle Error!
+    - model.errors.full_messages.each do |message|
+      %p #{message}

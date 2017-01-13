@@ -1,0 +1,64 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Add #{inverse_user_type}
+        %small Connect to a #{inverse_user_type} account
+
+.row
+  .col-sm-12
+    = render 'shared/messages'
+  .col-sm-4
+    - if landlord?
+      = render 'landlord_form'
+    - elsif tenant?
+      = render 'tenant_form'
+  .col-sm-8
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        REQUEST LIST
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body
+        %table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th #{inverse_user_type} Name
+              %th #{inverse_user_type} Email
+              %th Actions
+          %tbody
+            - @request_connections.each do |p|
+              %tr
+                %td= landlord? ? p.user.name : p.connected_user.name
+                %td= landlord? ? p.user.email : p.connected_user.email
+                %td
+                  = link_to approve_connection_path(p.id), class: 'btn btn-purple' do
+                    %i.glyphicon.glyphicon-thumbs-up
+                  = link_to decline_connection_path(p.id), class: 'btn btn-danger', method: :delete, 'data-confirm' => 'Are you sure?' do
+                    %i.fa.fa-times.fa-white
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        PENDING CONNECTION REQUESTS
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body
+        %table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th #{inverse_user_type} Name
+              %th #{inverse_user_type} Email
+              %th Actions
+          %tbody
+            - @pending_connections.each do |p|
+              %tr
+                %td= p.connected_user_info(current_user)[:name]
+                %td= landlord? ? p.tenant_email : p.landlord_email
+                %td
+                  = link_to decline_connection_path(p.id), class: 'btn btn-danger', method: :delete, 'data-confirm' => 'Are you sure?' do
+                    %i.fa.fa-times.fa-white

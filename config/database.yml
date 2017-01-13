@@ -1,0 +1,9 @@
+production:
+  adapter:  mysql2
+  host:     localhost
+  port:     3306
+  encoding: utf8
+  database: genielet_production
+  pool:     5
+  username: root
+  password: Tintr3353@

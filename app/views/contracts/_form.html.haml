@@ -1,0 +1,51 @@
+= form_for @contract do |f|
+  = render partial: 'shared/form_errors', locals: {model: f.object}
+  .panel.panel-default
+    .panel-heading
+      %i.fa.fa-external-link-square
+      ADD CONTRACT
+      .panel-tools
+        %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+        %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+          %i.fa.fa-times
+    .panel-body
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :tenant_id, 'Tenant', class: 'control-label'
+            = f.select :tenant_id, current_user.approved_connections.collect {|c| [c.connected_user_info(current_user)[:name], c.connected_user_info(current_user)[:id], {'data-connection_id' => c.id}]}, {}, class: 'form-control', id: 'contract-tenant-select'
+            = f.hidden_field :connection_id, id: 'contract-connection-id'
+          .form-group
+            = f.label :property_id, 'Property', class: 'control-label'
+            = f.select :property_id, current_user.properties.collect {|c| [c.name, c.id]}, {}, class: 'form-control'
+          .form-group
+            = f.label :start_date, 'Start Date', class: 'control-label'
+            .input-group
+              = f.text_field :start_date, class: 'form-control date-picker', id: 'contract-start-date'
+              %span.input-group-addon
+                %i.fa.fa-calendar
+          .form-group
+            = f.label :end_date, 'End Date', class: 'control-label'
+            .input-group
+              = f.text_field :end_date, class: 'form-control date-picker', id: 'contract-end-date'
+              %span.input-group-addon
+                %i.fa.fa-calendar
+        .col-sm-6
+          .form-group
+            = f.label :room_number, 'Room Number', class: 'control-label'
+            = f.number_field :room_number, :placeholder => "Room Number", class: 'form-control'
+          .form-group
+            = f.label :rental, 'Rental Amount', class: 'control-label'
+            = f.text_field :rental, :placeholder => "Rental Amount", class: 'form-control'
+          .form-group
+            = f.label :pay_date, 'Pay Date', class: 'control-label'
+            = f.select :pay_date, (1..31), {},  class: 'form-control'
+          .form-group
+            = f.label :notes, 'Notes', class: 'control-label'
+            = f.text_area :notes, :placeholder => "Notes", rows: 6, class: 'form-control'
+
+      .pull-right
+        - if @contract.new_record?
+          = f.submit 'Add Contract', class: 'btn btn-primary'
+        - else
+          = f.submit 'Update Contract', class: 'btn btn-primary'

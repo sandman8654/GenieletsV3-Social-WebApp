@@ -1,0 +1,751 @@
+
+@mixin animation($transition-property, $transition-duration, $transition-timing) {
+transition-property: $transition-property;transition-duration: $transition-duration;transition-timing-function: $transition-timing;-moz-transition-property:$transition-property;-moz-transition-duration: $transition-duration;-moz-transition-timing-function:$transition-timing;-webkit-transition-property:$transition-property;-webkit-transition-duration: $transition-duration;-webkit-transition-timing-function:$transition-timing;-o-transition-property:$transition-property;-o-transition-duration: $transition-duration;-o-transition-timing-function:$transition-timing;-ms-transition-property:$transition-property;
+-ms-transition-duration: $transition-duration;-ms-transition-timing-function:$transition-timing;
+}
+@mixin boxsizing() {
+-moz-box-sizing:    border-box;   -webkit-box-sizing: border-box;    box-sizing:        border-box;
+}
+
+
+$transition-property: all;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+
+
+$classmain : ".zoombox-maincon";
+
+#{$classmain} {
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:10001;
+  width: 100%;
+  height: 100%;
+    }
+#{$classmain} .zoombox-bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    background: rgba(0,0,0,0.2);
+ background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC42Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4xNiIvPgogIDwvcmFkaWFsR3JhZGllbnQ+CiAgPHJlY3QgeD0iLTUwIiB5PSItNTAiIHdpZHRoPSIxMDEiIGhlaWdodD0iMTAxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.16) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.6)), color-stop(100%,rgba(0,0,0,0.16)));
+background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.16) 100%);
+background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.16) 100%);
+background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.16) 100%);
+background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.16) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99000000', endColorstr='#29000000',GradientType=1 );
+
+  @include animation($transition-property, $transition-duration, $transition-timing);
+    }
+#{$classmain} .zoombox-bg.pureblack{
+
+  background: #000;
+}
+    $cborder: #fff;
+    
+$transition-property: all;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder-con{
+    position: absolute;
+    @include animation($transition-property, $transition-duration, $transition-timing);
+    }
+
+$transition-property: none;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain}.noanim .holder-con{
+  transition-property: none;
+  -webkit-transition-property: none;
+}
+
+#{$classmain} .holder-con > .close-btn, #{$classmain} .holder-con .social-btn{
+    display: block;
+    position: absolute;
+    }
+    
+$transition-property: width,height,transform;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder{
+    display: block;
+    width:100px;
+    height:100px;
+  position: relative;
+    @include animation($transition-property, $transition-duration, $transition-timing);
+    }
+
+
+#{$classmain}.noanim .holder{
+  transition-property: none;
+  -webkit-transition-property: none;
+}
+#{$classmain}.noanim .holder-bg{
+  transition-property: none;
+  -webkit-transition-property: none;
+}
+
+#{$classmain} .holder.type-image{
+  cursor: move;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+  cursor: url(img/gamma-zoombox-zoomit.png) 4 4, zoom-in;
+}
+#{$classmain} .bigimage-con > img{
+  cursor: move;
+  cursor: -moz-zoom-out;
+  cursor: zoom-out;
+  cursor: url(img/gamma-zoombox-zoomout.png) 4 4, zoom-out;
+}
+#{$classmain} .holder.type-iframe{
+  background: #fff;
+  @include boxsizing();
+}
+#{$classmain} div.holder.type-inlinecontent{
+  background: #fff;
+  @include boxsizing();
+}
+#{$classmain} div.holder.type-inlinecontent > *{
+  width: 100%;height: 100%;overflow-y: auto;
+}
+#{$classmain} .holder.type-iframe > iframe{
+  padding:10px;
+  @include boxsizing();
+}
+#{$classmain} .holder.type-inlinecontent > .the-item > *{
+  padding:10px;
+  @include boxsizing();
+}
+#{$classmain} .holder .preloader{ 
+    
+    width:128px;
+    height:40px;
+    background: transparent url(img/preloader.gif) center center no-repeat;
+    margin-left: -64px; margin-top: -20px;
+    position: absolute;
+    top:50%; left:50%; 
+}
+$transition-property: all;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder > .the-item{
+    display:block;
+    transform-origin: top left;
+    @include animation($transition-property, $transition-duration, $transition-timing);
+    }
+
+#{$classmain} .bigimage-con{
+position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#{$classmain} .bigimage-con:empty{
+  display: none;
+}
+$transition-property: all;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+#{$classmain} .bigimage-con > img{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  opacity:0;
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+#{$classmain} .gallery-menu-con{
+  position: fixed;
+  bottom:0;
+  width: 100%;
+}
+    /* estethic styling */
+    
+
+#{$classmain}:empty{
+    display:none;
+    }
+#{$classmain}.disabled{
+    display:none;
+    }
+#{$classmain} .holder{
+    background: #fff;
+    }
+
+#{$classmain} .holder-con.pastHolder{
+  left:-50%;
+  opacity:0;
+}
+    
+#{$classmain} .holder-con {
+    top:0;
+    left:0;
+    border:5px solid $cborder;
+    border-radius:0px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,1);
+    margin-left:-50px;
+    margin-top:-50px;
+  top:50%;
+  left:50%;
+    }
+#{$classmain} .holder-con > .holder-text {
+  position: absolute;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Arial;
+  font-size: 14px;
+  top: -25px; left:0;
+  color: #111;
+  opacity:0.8;
+
+}
+    
+#{$classmain} .holder-con > .close-btn{
+    top:10px;
+    right:5px;
+    width:25px;
+    height:25px;
+    background: transparent url(img/zoombox-close.png) no-repeat center center;
+    border:2px solid #222;
+    border-radius:0px;
+    cursor: pointer;
+    }
+    
+#{$classmain} .holder-con > .close-btn{
+    top:10px;
+    right: -35px;
+    
+    border:5px solid $cborder;
+    border-radius:0px;
+    }
+#{$classmain} .holder > .the-item{
+    opacity:0;
+    }
+#{$classmain} .holder > img.the-item{
+    opacity:0;
+    transform: scale(0.1);
+    }
+#{$classmain} .holder.loaded > img.the-item{
+    transform: scale(1);
+    }
+$transition-property: opacity, display;
+$transition-duration: 1s;
+$transition-timing: ease-out;
+#{$classmain} .holder.loaded > .preloader{
+    @include animation($transition-property, $transition-duration, $transition-timing);
+    }
+#{$classmain} .holder.loaded > .preloader{
+    opacity:0;
+    display: none;
+    }
+#{$classmain} .holder.loaded > .the-item{
+    opacity:1;
+    width:100%;
+    height:100%;
+    }
+
+
+#{$classmain} .holder-con.nobg .holder-bg{
+  display: none;
+}
+#{$classmain} .holder-con.nobg .holder{
+  background: transparent;
+}
+#{$classmain} .holder-con.nobtnsocial .social-btn{
+  display: none;
+}
+#{$classmain} .holder-con.nobtnclose .close-btn{
+  display: none;
+}
+$transition-property: width,height,margin-left,margin-top;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder-bg{
+  position: absolute;
+  left:50%;
+  top:50%;
+  width: 0;
+  height: 0;
+}
+
+$size: 50px;
+
+#{$classmain} .con-zoomboxArrows .zb-arrow-left{
+  position: absolute;
+  top:50%;
+  left:15px;
+  width: $size;
+  height: $size;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255,255,255,0.5);
+  background-image: url(img/arrow-left-90.png);
+  cursor: pointer;
+  margin-top: -($size/2);
+}
+#{$classmain} .con-zoomboxArrows .zb-arrow-right{
+  position: absolute;
+  top:50%;
+  right:15px;
+  width: $size;
+  height: $size;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255,255,255,0.5);
+  background-image: url(img/arrow-right-90.png);
+  cursor: pointer;
+  margin-top: -($size/2);
+}
+
+
+#{$classmain} div.holder.type-notification{
+  background: #fff;
+}
+#{$classmain} .holder.type-notification  .the-sizer{
+  padding:10px;
+  min-width: 200px;
+  text-align: center;
+}
+
+$classmain : ".zoombox-maincon.skin-gamma";
+
+$cborder: rgba(255,255,222,0.27);
+#{$classmain} .holder-con{
+  top:0;
+  left:0;
+  border:0px solid $cborder;
+  border-radius:3px;
+  box-shadow: 0 0 0px 0 rgba(0,0,0,1);
+  margin-left:-50px;
+  margin-top:-50px;
+  top:50%;
+  left:50%;
+}
+#{$classmain} .holder{
+background-color: transparent;
+}
+$transition-property: width,height,margin-left,margin-top;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder-bg{
+  background-color: $cborder;
+  border-radius:2px;
+  border: 1px solid rgba(255,255,255,0.1);
+  @include boxsizing();
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+#{$classmain} .holder.type-iframe{
+  background: #fff;
+}
+
+$size: 22px;
+$transition-property: all;
+$transition-duration: 0.5s;
+$transition-timing: ease-out;
+#{$classmain} .holder-con > .close-btn{
+  top:-25px;
+  right:-25px;
+  width:$size;
+  height:$size;
+  background: transparent url(img/gamma-zoombox-close.png) no-repeat center center;
+
+  border:0px solid #222;
+  border-radius:0px;
+  cursor: pointer;
+  background-size:cover;
+}
+$transition-property: background;
+#{$classmain} .holder-con .social-btn{
+  top:0;
+  right:-25px;
+  width:$size;
+  height:$size;
+  background-color: transparent;
+  background-image: url(img/gamma-zoombox-btn-social.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size:cover;
+
+  border:0px solid #222;
+  border-radius:50%;
+  cursor: pointer;
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+
+@media all and (max-width:481px){
+  $size: 33px;
+#{$classmain} .holder-con > .close-btn{
+  width:$size;
+  height:$size;
+}
+  #{$classmain} .holder-con .social-btn{
+    top: 22px;
+    width:$size;
+    height:$size;
+  }
+
+}
+#{$classmain} .holder-con .social-btn.active{
+  background-color: rgba(255,255,255,0.3);
+}
+
+#{$classmain} .con-zoomboxArrows .zb-arrow-left{
+  background-color: $cborder;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#{$classmain} .con-zoomboxArrows .zb-arrow-right{
+  background-color: $cborder;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.con-dropdowner {
+  position: relative;
+}
+.con-dropdowner .auxpadder{
+  position: absolute;
+  width:100%;
+  height:50px;
+  z-index: 94;
+}
+$transition-property: opacity, visibility;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+.con-dropdowner .dropdowner{
+  position: absolute;
+  right: 0;
+  top:45px;
+  z-index: 95;
+  background: #fff;
+  padding: 10px 15px 10px;
+  border:1px solid rgba(0,0,0,0.2);
+  visibility: hidden;
+  box-shadow: 0 0 7px 0 rgba(0,0,0,0.3);
+  opacity:0;
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+.con-dropdowner .auxpadder{
+  position: absolute;
+  top:0;
+  right:-25px;
+  width:40px;
+  height:50px;
+}
+.con-dropdowner .dropdowner.forright{
+  top:-2px;
+  right:10px;
+}
+
+.con-dropdowner .dropdowner:after, .con-dropdowner .dropdowner:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.con-dropdowner .dropdowner:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #fff;
+  border-width: 7px;
+  right: 10%;
+  margin-left: -7px;
+}
+.con-dropdowner .dropdowner.forright:after {
+  border-bottom-color: transparent;
+  border-left-color: #fff;
+  right: -14px;
+  top:5px;
+}
+con-dropdowner .dropdowner:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: rgba(0,0,0,0.8);
+  border-width: 9px;
+  right: 10%;
+  margin-left: -9px;
+}
+con-dropdowner .dropdowner.forright:before {
+  border-bottom-color: transparent;
+  border-left-color: rgba(0,0,0,0.8);
+  right: -14px;
+  top:5px;
+}
+
+.con-dropdowner:hover .dropdowner{
+  visibility: visible;
+  opacity:1;
+}
+
+#{$classmain} .social-options-con{
+  position: absolute;
+  top:2px;
+  right:0px;
+}
+#{$classmain} .social-options-con .dropdowner{
+  width: 300px;
+}
+
+
+    $aux: 14px;
+    .thumb20{
+        display:inline-block;
+        width:$aux;
+        height:$aux;
+        position:relative; top:2px; 
+        margin-right:2px;
+        border:1px solid rgba(255,255,255,0.3);
+        @include boxsizing();
+        }
+
+
+
+/*
+ * Author: Digital Zoom Studio
+ * Product: DZS Dock
+ * Website: http://digitalzoomstudio.net/
+ * Portfolio: http://bit.ly/nM4R6u
+ *
+ * Version: 0.50
+ */
+
+
+@mixin animation($transition-property, $transition-duration, $transition-timing) {
+  transition-property: $transition-property;transition-duration: $transition-duration;transition-timing-function: $transition-timing;-moz-transition-property:$transition-property;-moz-transition-duration: $transition-duration;-moz-transition-timing-function:$transition-timing;-webkit-transition-property:$transition-property;-webkit-transition-duration: $transition-duration;-webkit-transition-timing-function:$transition-timing;-o-transition-property:$transition-property;-o-transition-duration: $transition-duration;-o-transition-timing-function:$transition-timing;-ms-transition-property:$transition-property;
+  -ms-transition-duration: $transition-duration;-ms-transition-timing-function:$transition-timing;
+}
+@mixin boxsizing() {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+}
+
+$classmain : ".dzsdock";
+
+$transition-property: all;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+
+/* -- functional styling */
+#{$classmain}{ position:relative;
+  width:100%;
+
+}
+#{$classmain} .item-tobe{ position:relative;
+}
+#{$classmain} .items > span {
+  position: relative;
+}
+#{$classmain} .items > span > img{
+  width: 100%;
+  display: block;
+}
+
+/* -- estethic styling */
+
+.dzsdock-con{
+  position: fixed;
+  bottom: 0;
+  left:0;
+}
+
+$transition-property: opacity,left;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+#{$classmain} .items{
+  @include animation($transition-property, $transition-duration, $transition-timing);
+  text-align: left;
+  position: relative;
+}
+
+
+#{$classmain} .dzsdock-clip{
+  width: 100%;
+  overflow: hidden;
+}
+$transition-property: width;
+$transition-duration: 0.2s;
+$transition-timing: ease-out;
+#{$classmain} .items > *{
+  margin:0;
+  border:0;
+  /*
+  display: block;
+  float:left;
+  display: table-cell;
+  */
+  width: 0;
+  display: inline-block;
+  vertical-align: bottom;
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+#{$classmain} .items:after{
+  content: " ";
+  display: block;
+  clear:both;
+}
+
+
+
+$size: 36px;
+$color_highlight: rgba(50,50,50,0.9);
+#{$classmain} .hero-icon{
+  background-color: $color_highlight;
+  width: $size;
+  height: $size;
+  position: absolute; top:50%; left:50%;
+  margin-left: -$size/2; margin-top: -$size/2;
+  border-radius:50%;
+  background-size: cover;
+  display: block;
+  background-position: center center;
+}
+#{$classmain} .icon-video{
+  background-image: url(img/hero-type-video.png);
+}
+.lightboxanchor{
+  display: inline-block;
+}
+$size: 32px;
+div[class*="lightboxicon-"]{
+  width: $size;
+  height: $size;
+  background-color: transparent;
+  background-size:  cover;
+  background-repeat: no-repeat;
+}
+.lightboxicon-twitter{
+  background-image: url(img/tweet.png);
+}
+.lightboxicon-googleplus{
+  background-image: url(img/google-plus-1.png);
+}
+
+
+$classmain : ".dzsdock.skin-default";
+
+
+#{$classmain} .items > *{
+  border: 3px solid rgba(255,255,255,0.5);
+  @include boxsizing();
+  cursor: pointer;
+}
+#{$classmain} .items > *.activecss{
+  border: 3px solid rgba(255,255,255,0.75);
+}
+
+
+$color_2: #777777;
+/* ==== thumb styling */
+.thumb-gamma{
+  border: 10px solid rgba(255,255,255,0.25);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  display: inline-block;
+  margin:3px;
+  @include boxsizing();
+}
+.cimage-fullwidth img:first-child{
+  width: 100%;
+}
+.thumb-title{
+  text-align: center;
+}
+.thumb-subtitle{
+  text-align: center;
+  margin-top: 2px;
+  opacity:0.5;
+  margin-bottom: 7px;
+}
+
+$transition-duration: 0s;
+.no-animation{
+transition-duration: $transition-duration!important;-moz-transition-duration: $transition-duration!important;-webkit-transition-duration: $transition-duration!important;-o-transition-duration: $transition-duration!important;
+  -ms-transition-duration: $transition-duration!important;
+}
+
+
+$transition-property: opacity;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+.effect-justopacity{
+
+}
+
+.effect-justopacity > img:first-child{
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+.effect-justopacity:hover > img:first-child{
+  opacity:0.7;
+}
+
+
+$transition-property: opacity, transform;
+$transition-duration: 0.3s;
+$transition-timing: ease-out;
+
+.effect-icona{
+  position: relative;
+  display: block;
+}
+
+.effect-icona > img{
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+
+.effect-icona:hover > img{
+  opacity:0.8;
+}
+
+$size: 55px;
+$color_highlight: rgba(50,50,50,0.9);
+.effect-icona .zoomcon-enlarge{
+    background-color: rgba(196, 96, 96, 0.7);
+    width: $size;
+    height: $size;
+    position: absolute; top:50%; left:50%;
+    margin-left: -$size/2; margin-top: -$size/2;
+    border-radius:50%;
+    background-size: cover;
+    display: block;
+    background-position: center center;
+  background-image: url(img/icon-enlarge.png);
+
+
+  transform: rotate(30deg) scale(0.5);
+  -ms-transform: rotate(30deg) scale(0.5); /* IE 9 */
+  -webkit-transform: rotate(30deg) scale(0.5); /* Safari and Chrome */
+  opacity: 0;
+
+  @include animation($transition-property, $transition-duration, $transition-timing);
+}
+.effect-icona:hover > div.zoomcon-enlarge{
+  transform: rotate(0) scale(1);
+  -ms-transform: rotate(0deg) scale(1); /* IE 9 */
+  -webkit-transform: rotate(0deg) scale(1); /* Safari and Chrome */
+  opacity: 0.8;
+
+}
+
+
+.effect-icona.for-playbtn .zoomcon-enlarge{
+  transform: rotate(0deg) scale(0.5);
+  -ms-transform: rotate(0deg) scale(0.5); /* IE 9 */
+  -webkit-transform: rotate(0deg) scale(0.5); /* Safari and Chrome */
+  background-image: url(img/icon-playbtn.png);
+}
+
+.the-item.type-inlinecontent .span6{
+  width: 48%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.hidden{
+  display: none;
+}
+.toexecute{
+  display: none;
+}

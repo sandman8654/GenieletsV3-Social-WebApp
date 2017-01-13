@@ -1,0 +1,33 @@
+<p>
+  Dear <%= @tenant.name %>>,
+</p>
+
+<p>
+  We wanted to bring it to your attention that you have payments due soon.
+  Here are payments information which are now overdue.
+</p>
+
+<table>
+  <thead>
+  <th>Property Name</th>
+  <th>Landlord Name</th>
+  <th>Due Date</th>
+  <th>Amount</th>
+  </thead>
+  <tbody>
+  <% @payments.each do |payment|%>
+      <tr>
+        <td><%= payment.property.name %></td>
+        <td><%= payment.contract.landlord.name %></td>
+        <td><%= payment.due_date.to_date %></td>
+        <td><%= payment.precise_amount %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p>
+  In case you were unaware, this payment can be made via PayPal, making payment a whole lot easier.
+</p>
+
+Regards,

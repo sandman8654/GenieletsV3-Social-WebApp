@@ -1,0 +1,27 @@
+.box-login
+  %h3 Sign in to your account
+  %p
+    Please enter your name and password to log in.
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = render 'shared/messages'
+    %fieldset
+      .form-group
+        %span.input-icon
+          %input.form-control{:name => "user[email]", :placeholder => "Email", :type => "email", :autofocus => true}
+            %i.fa.fa-user
+      .form-group.form-actions
+        %span.input-icon
+          %input.form-control.password{:name => "user[password]", :placeholder => "Password", :type => "password", :autocomplete => "off"}
+            %i.fa.fa-lock
+            - if devise_mapping.recoverable?
+              = link_to new_password_path(resource_name), class: 'forgot' do
+                I forgot my password
+      .form-actions
+        - if devise_mapping.rememberable?
+          %label.checkbox-inline{:for => "remember"}
+            %input#remember.grey.remember{:name => "user[remember_me]", :type => "checkbox"}
+              Keep me signed in
+        %button.btn.btn-bricky.pull-right{:type => "submit"}
+          Login
+          %i.fa.fa-arrow-circle-right
+  = render 'devise/shared/links'

@@ -1,0 +1,12 @@
+<p>Dear <%= @email %>!</p>
+
+<p>
+  In order to make sure that our systems are completely secure we just require you to verify that you are <%= @email %>.
+  By verifying this address, it will allow you to receive notifications and any account updates from GenieLets.
+  Please follow the link below to complete the verification process:
+</p>
+<p>
+    If you are not <%= @email %> and did not request this verification then please ignore and delete this email.
+</p>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+

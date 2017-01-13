@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title= content_for?(:title) ? yield(:title) : 'Genielets'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Genielets2'}"}
+  %body
+    = yield
+
+    %br
+    Thanks.
+    %br
+    %a{href: "http://geniebytes.us8.list-manage.com/track/click?u=136afe4f07f6aa663810018b0&id=8d20087047&e=79fa57727d"} GenieLets
+    %br
+    %p
+      GenieLets is a subsidiary of Geniebytes Limited.
+    %p
+      This email is confidential and intended solely for the use of the individual to whom it is addressed.
+      Any views or opinions presented are solely those of the author and do not necessarily represent those of GenieBytes Limited.
+      If you are not the intended recipient, be advised that you have received this email in error and that any use,
+      dissemination, forwarding, printing or copying of this email is strictly prohibited.
+      If you have received this email in error please notify us
+      %a{href: "mailto:helpdesk@genielets.com"} helpdesk@genielets.com
+      / .
+      %br
+      Geniebytes Limited is registered in England and Wales, company number 9079102.

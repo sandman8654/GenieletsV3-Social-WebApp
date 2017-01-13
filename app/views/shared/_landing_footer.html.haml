@@ -1,0 +1,72 @@
+%footer.footer-wrapper
+  .container
+    .col-lg-4.col-md-4.col-sm-8
+      .widget
+        %h2.general-title
+          %span Twitter Stream
+        .tweets
+          %ul
+            %li
+              %span.content
+                Property News: Tenants face eviction as landlords capitalise on rising hourse prices
+                %br
+                %a(href="http://www.geniebytes.com" target="_blank") http://ow.ly/2K7dxF
+
+        %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/GenieLetsApp"} 
+          | Follow @genielets
+          :javascript
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    .col-lg-4.col-md-4.col-sm-8
+      .widget
+        %h2.general-title
+          %span Social Links
+        .tweets
+          %ul.dm-social{:style => "float:none; text-align: center;"}
+            %li
+              %a.icon-facebook{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://www.facebook.com/Genie.Lets", :title => "Facebook", target: '_blank'} Facebook
+            %li
+              %a.icon-google-plus{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://plus.google.com/101713448702200686241", :title => "Google+", target: '_blank'} Google+
+            %li
+              %a.icon-twitter{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "https://twitter.com/GenieLetsApp", :title => "Twitter", target: '_blank'} Twitter
+            %li
+              %a.icon-pinterest{"data-toggle" => "tooltip", "data-placement" => "bottom", :href => "http://www.pinterest.com/alan1915",  :title => "Pinterest", target: '_blank'} Pinterest
+            %li
+              %a.icon-linkedin{"data-toggle" => "tooltip", "data-placement" => "bottom", :href => "https://www.linkedin.com/profile/view?id=356181760",  :title => "Linked", target: '_blank'} LinkedIn
+    .col-lg-4.col-md-4.col-sm-8
+      .widget
+        %h2.general-title
+          %span Contact Details
+        %p If you want to talk to us, please use the contact points below.
+        %ul.contact-details
+          %li
+            %i.icon-envelope-alt
+            <a href="mailto:info@genielets.com">info@genielets.com</a>
+.copyright-wrapper
+  .container
+    .col-lg-3.col-md-3.col-sm-3
+      %span.copyright
+        © Copyright 2015 -
+        Genielets
+    .col-lg-9.col-md-9.col-sm-9
+      %nav
+        %ul.footer-menu
+          %li
+            = link_to 'Home', root_path
+          %li
+            = link_to 'About', about_path
+          %li
+            = link_to 'Features', features_path
+          %li
+            = link_to 'Rightmove', rightmove_path
+          %li
+            = link_to 'Vacancies', vacancies_path
+          %li
+            = link_to 'Videos', videos_path
+          %li
+            = link_to 'Pricing', pricing_path
+          %li
+            = link_to 'Testimonials', testimonials_path
+          %li
+            = link_to 'Privacy Policy', policy_path
+          %li
+            = link_to 'Contact Us', contactus_path

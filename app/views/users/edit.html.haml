@@ -1,0 +1,178 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Profile
+        %small account details
+
+.row
+  .col-sm-12
+    = render 'shared/messages'
+
+    .tab-content
+      = form_for @user, url: update_profile_path, method: :post, html: { multipart: true, class: 'user-profile' } do |f|
+        = render partial: 'shared/form_errors', locals: {model: f.object}
+        .row
+          .col-md-12
+            %h3 Account Info
+            %hr
+          .col-md-6
+            .form-group
+              %label.control-label
+                First Name
+              = f.text_field :first_name, :placeholder => "First Name", class: 'form-control', id: 'firstName'
+            .form-group
+              %label.control-label
+                Middle Name
+              = f.text_field :middle_name, :placeholder => "Middle Name", class: 'form-control', id: 'middleName'
+            .form-group
+              %label.control-label
+                Last Name
+              = f.text_field :last_name, :placeholder => "Last Name", class: 'form-control', id: 'lastName'
+            .form-group
+              %label.control-label
+                Primary Email Address
+              = f.email_field :email, :placeholder => "Primary Email Address", class: 'form-control', id: 'primary_email'
+            - if tenant?
+              .form-group
+                %label.control-label
+                  Secondary Email Address
+                = f.email_field :secondary_email, :placeholder => "Secondary Email Address", class: 'form-control', id: 'secondary_email'
+            .form-group
+              %label.control-label
+                Password
+              = f.password_field :password, :placeholder => "Password", class: 'form-control', id: 'password', value: @user.password
+            .form-group
+              %label.control-label
+                Confirm Password
+              = f.password_field :password, :placeholder => "Confirm Password", class: 'form-control', id: 'password_again', value: @user.password_confirmation
+            .form-group
+              %label.control-label{:for => 'primary_phone'}
+                Primary Phone
+                %small.text-warning (999) 999-9999
+              .input-group
+                %span.input-group-addon
+                  %i.fa.fa-phone
+                = f.text_field :primary_phone, class: 'form-control input-mask-phone', id: 'primary_phone'
+            .form-group
+              %label.control-label{:for => 'secondary_phone'}
+                Secondary Phone
+                %small.text-warning (999) 999-9999
+              .input-group
+                %span.input-group-addon
+                  %i.fa.fa-phone
+                = f.text_field :secondary_phone, class: 'form-control input-mask-phone', id: 'secondary_phone'
+          .col-md-6
+            - if tenant?
+              .form-group.connected-group
+                %label.control-label
+                  Date of Birth
+                .row
+                  .col-md-12
+                    = f.date_select :birthday, {start_year: 1950}, {class: 'form-control'}
+              .form-group
+                %label.control-label
+                  Gender
+                %div
+                  %label.radio-inline
+                    = f.radio_button :gender, true, class: 'grey'
+                    Male
+                  %label.radio-inline
+                    = f.radio_button :gender, false, class: 'grey'
+                    Female
+              .form-group
+                %label.control-label
+                  Notes
+                = f.text_area :notes, :placeholder => "Notes", class: 'form-control', id: 'notes'
+            - if landlord?
+              .form-group
+                %label.control-label
+                  Address Line 1
+                = f.text_field :address1, :placeholder => "Address Line 1", class: 'form-control', id: 'address1'
+              .form-group
+                %label.control-label
+                  Address Line 2
+                = f.text_field :address2, :placeholder => "Address Line 2", class: 'form-control', id: 'address2'
+              .row
+                .col-md-6
+                  .form-group
+                    %label.control-label
+                      City / Town
+                    = f.text_field :city, :placeholder => "City / Town", class: 'form-control', id: 'city'
+                .col-md-6
+                  .form-group
+                    %label.control-label
+                      Region / County / State
+                    = f.text_field :state, :placeholder => "Region / County / State", class: 'form-control', id: 'state'
+              .form-group
+                %label.control-label
+                  Country
+                = country_select :user, :country, ["United Kingdom", "United States", "France", "Germany"], {}, {selected: 'GB', class: 'form-control'}
+            .form-group
+              %label
+                Select Avatar
+              .fileupload.fileupload-new{"data-provides" => "fileupload"}
+                .fileupload-new.thumbnail{:style => "width: 150px; height: 150px;"}
+                  = image_tag @user.avatar.url(:medium)
+                .fileupload-preview.fileupload-exists.thumbnail{:style => "max-width: 150px; max-height: 150px; line-height: 20px;"}
+                .user-edit-image-buttons
+                  %span.btn.btn-light-grey.btn-file
+                    %span.fileupload-new
+                      %i.fa.fa-picture
+                      Select image
+                    %span.fileupload-exists
+                      %i.fa.fa-picture
+                      Change
+                    = f.file_field :avatar
+                  %a.btn.fileupload-exists.btn-light-grey{"data-dismiss" => "fileupload", :href => "#"}
+                    %i.fa.fa-times
+                    Remove
+                  %div Maximum: 2MB
+        - if landlord?
+          .row
+            .col-md-6
+              %h3 Company Info
+              %hr
+              .form-group
+                %label.control-label
+                  Company Name
+                = f.text_field :company_name, :placeholder => "Company Name", class: 'form-control', id: 'companyName'
+              .form-group
+                %label.control-label
+                  Company Description
+                = f.text_area :company_desc, :placeholder => "Company Description", class: 'form-control', id: 'companyDesc', rows: 4
+              .form-group
+                %label.control-label
+                  VAT Number
+                = f.text_field :vat_number, :placeholder => "VAT Number", class: 'form-control', id: 'vat_number'
+            .col-md-6
+              %h3 Payment Info
+              %hr
+              .form-group
+                %label.control-label
+                  Paypal Email
+                = f.email_field :paypal_email, :placeholder => "Paypal Email", class: 'form-control', id: 'paypalEmail'
+              .form-group
+                %label.control-label
+                  Bank Account Number
+                = f.text_field :bank_account_no, :placeholder => "Bank Account No", class: 'form-control', id: 'bankAccountNo'
+              .form-group
+                %label.control-label
+                  Bank Name
+                = f.text_field :bank_name, :placeholder => "Bank Name", class: 'form-control', id: 'bank_name'
+              .form-group
+                %label.control-label
+                  Bank Branch
+                = f.text_field :bank_branch, :placeholder => "Bank Branch", class: 'form-control', id: 'bank_branch'
+              .form-group
+                %label.control-label
+                  Currency
+                = f.currency_select :currency, ['gbp', 'usd'], {}, class: 'form-control'
+        .row
+          .col-md-8
+            %p
+              By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
+          .col-md-4
+            %button.btn.btn-teal.btn-block{:type => "submit"}
+              Update
+              %i.fa.fa-arrow-circle-right

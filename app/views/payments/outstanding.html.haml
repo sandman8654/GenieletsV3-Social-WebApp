@@ -1,0 +1,68 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Payment Dues
+        %small Manage Payments
+
+.row
+  .col-md-12
+    = render 'shared/messages'
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        Outstading Payments
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-refresh{:href => "#"}
+            %i.fa.fa-refresh
+      .panel-body
+        %table#outstanding-payments-table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th= inverse_user_type.humanize
+              %th Invoice ID
+              %th Due Date
+              %th Amount
+              %th Status
+              %th Pay Date
+              - if landlord?
+                %th Actions
+              - elsif tenant?
+                %th Payments
+          %tbody
+            - @outstanding_payments.each do |p|
+              - if p.contract.connection.approved
+                %tr
+                  - if landlord?
+                    %td= p.contract.tenant_info(current_user)[:name]
+                  - elsif tenant?
+                    %td= p.contract.landlord.name
+                  %td= p.id
+                  %td= p.due_date
+                  %td= p.precise_amount
+                  %td= p.status
+                  %td= p.contract.pay_date
+                  - if landlord?
+                    %td
+                      - if p.paused
+                        %span You payment is paused.
+                        %br
+                        %span Please
+                        = link_to 'upgrade', account_summary_path
+                        %span subscription plan.
+                      - else
+                        = link_to payment_accept_path(p), class: 'btn btn-primary' do
+                          %i.fa.fa-pencil
+                          Mark as Paid
+                        = link_to payment_path(p), class: 'btn btn-danger', method: :delete, 'data-confirm' => 'Are you sure?' do
+                          %i.fa.fa-times
+                  - elsif tenant?
+                    %td
+                      = link_to paypal_url(p, payment_confirm_url(p.return_token, payment_method: Payment::PAID_PAYPAL)),
+                                data: {:confirm => 'Refunds via paypal are to be dealt with directly with the tenant, GenieLets cannot offer refunds, click OK to proceed.'} do
+                        = image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif")
+                      = link_to 'Cash', payment_confirm_path(p.return_token, payment_method: Payment::PAID_CASH), class: 'btn btn-primary',
+                                data: {:confirm => 'Refunds via cash are to be dealt with directly with the tenant, GenieLets cannot offer refunds, click OK to proceed.'}
+                      = link_to 'Cheque', payment_confirm_path(p.return_token, payment_method: Payment::PAID_CHEQUE), class: 'btn btn-primary',
+                                data: {:confirm => 'Refunds via cheque are to be dealt with directly with the tenant, GenieLets cannot offer refunds, click OK to proceed.'}

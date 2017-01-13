@@ -1,0 +1,13 @@
+<p>
+  Dear <%= @payment.contract.landlord.name %>
+</p>
+
+<p>
+  We wanted to make you aware that your tenant <%= @payment.contract.tenant.name %> has successfully marked a payment of
+  £<%= @payment.precise_amount%> via “<%= @payment.paid_type%>” for your property <%= @payment.property.name%>.
+  This rent for this property is due on the <%= @payment.due_date.to_date%>.
+  <br/>
+  As soon as you receive this payment please mark it as received under the “Payments” section of your GenieLets Rent Portal.
+</p>
+
+Regards,

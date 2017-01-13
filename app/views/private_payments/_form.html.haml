@@ -1,0 +1,34 @@
+.row
+  .col-sm-12
+    = render 'shared/messages'
+  = form_for @private_payment, class: 'form-horizontal' do |f|
+    .col-sm-12
+      = render partial: 'shared/form_errors', locals: {model: f.object}
+    .col-md-6.col-sm-12
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-external-link-square
+          Private Payment Info
+          .panel-tools
+            %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+            %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+              %i.fa.fa-times
+        .panel-body
+          .form-group
+            = f.label :property_id, 'Property Name', class: 'control-label'
+            = f.select :property_id, current_user.properties.collect {|c| [c.name, c.id]}, {}, class: 'form-control'
+          .form-group
+            = f.label :date_paid, 'Date Paid', class: 'control-label'
+            .row
+              .col-md-12
+                = f.date_select :date_paid, {}, {class: 'form-control'}
+          .form-group
+            = f.label :amount, 'Amount', class: 'control-label'
+            = f.text_field :amount, :placeholder => "Amount", class: 'form-control'
+      .row
+        .col-sm-3.col-sm-offset-9
+          - if @private_payment.new_record?
+            = f.submit 'Add Payment', class: 'btn btn-primary pull-right'
+          - else
+            = f.submit 'Update Payment', class: 'btn btn-bricky pull-right'
+      %br

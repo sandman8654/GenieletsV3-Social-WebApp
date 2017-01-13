@@ -1,0 +1,66 @@
+Genielets2
+========================
+
+This application was generated with the rails_apps_composer gem:
+https://github.com/RailsApps/rails_apps_composer
+provided by the RailsApps Project:
+http://railsapps.github.io/
+
+________________________
+
+Recipes:
+
+* core
+* deployment
+* devise
+* email
+* extras
+* frontend
+* gems
+* git
+* init
+* learn_rails
+* locale
+* omniauth
+* pages
+* rails_bootstrap
+* rails_devise
+* rails_devise_pundit
+* rails_foundation
+* rails_mailinglist_signup
+* rails_omniauth
+* rails_signup_download
+* railsapps
+* readme
+* roles
+* setup
+* tests
+
+Preferences:
+
+* git: true
+* apps4: none
+* dev_webserver: thin
+* prod_webserver: thin
+* database: mysql
+* templates: haml
+* tests: none
+* frontend: simple
+* email: mandrill
+* authentication: devise
+* devise_modules: confirmable
+* authorization: none
+* form_builder: none
+* pages: users
+* locale: none
+* rvmrc: true
+* quiet_assets: true
+* local_env_file: figaro
+* better_errors: true
+* ban_spiders: true
+* jsruntime: true
+* deployment: capistrano3
+
+________________________
+
+License

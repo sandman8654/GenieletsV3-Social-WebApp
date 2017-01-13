@@ -1,0 +1,48 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        List Property
+        %small List of all Property
+.row
+  .col-sm-12
+    = render 'shared/messages'
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        Properties
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-refresh{:href => "#"}
+            %i.fa.fa-refresh
+      .panel-body
+        %table#properties-table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th Name of Building
+              %th Property Type
+              - if tenant?
+                %th Room/Office Number
+              - elsif landlord?
+                %th Rooms
+              - if landlord?
+                %th Rental Amount
+              %th Actions
+          %tbody
+            - @properties.each do |p|
+              %tr
+                %td= p.name
+                %td= p.property_type
+                %td= p.room_count
+                - if landlord?
+                  %td= p.rental
+                %td
+                  - if landlord?
+                    = link_to edit_property_path(p), class: 'btn btn-purple' do
+                      %i.fa.fa-pencil
+                    = link_to property_path(p), class: 'btn btn-blue' do
+                      %i.fa.fa-eye
+                    = link_to property_path(p), class: 'btn btn-danger', method: :delete, 'data-confirm' => 'Are you sure?' do
+                      %i.fa.fa-times.fa-white

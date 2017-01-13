@@ -1,0 +1,15 @@
+= form_for @connection, url: create_connection_path, method: :post do |f|
+  .panel.panel-default
+    .panel-heading
+      %i.fa.fa-external-link-square
+      ADD LANDLORD
+      .panel-tools
+        %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+        %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+          %i.fa.fa-times
+    .panel-body
+      .form-group
+        = f.label :landlord_email, 'Landlord Email', class: 'control-label'
+        = f.email_field :landlord_email, :placeholder => "Landlord Email", class: 'form-control'
+      .pull-right
+        = f.submit 'Add Landlord', class: 'btn btn-primary'

@@ -1,0 +1,65 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Paid Payments
+        %small Manage Payments
+
+.row
+  .col-md-12
+    = render 'shared/messages'
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        Paid Payments
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-refresh{:href => "#"}
+            %i.fa.fa-refresh
+      .panel-body
+        %table#paid-payments-table.table.table-striped.table-bordered.table-hover.table-full-width
+          %thead
+            %tr
+              %th= inverse_user_type.humanize
+              %th Invoice ID
+              %th Due Date
+              %th Amount
+              %th Status
+              %th Paid Date
+              %th Accepted Date
+              %th Refunded Date
+              %th Payment Type
+              - if landlord?
+                %th Actions
+          %tbody
+            - @paid_payments.each do |p|
+              %tr
+                - if landlord?
+                  %td= p.contract.tenant_info(current_user)[:name]
+                - elsif tenant?
+                  %td= p.contract.landlord.name
+                %td= p.id
+                %td= p.due_date
+                %td= p.precise_amount
+                %td= p.status
+                %td= p.date_paid
+                %td= p.date_accepted
+                %td= p.date_refunded
+                %td= p.paid_type
+                - if landlord?
+                  %td
+                    - if p.paused
+                      %span You payment is paused.
+                      %br
+                      %span Please
+                      = link_to 'upgrade', account_summary_path
+                      %span subscription plan.
+                    - else
+                      - if p.pending?
+                        = link_to payment_accept_path(p), class: 'btn btn-primary' do
+                          %i.fa.fa-pencil
+                          Accept Payment
+                      - elsif p.paid?
+                        = link_to payment_refund_path(p), class: 'btn btn-danger' do
+                          %i.fa.fa-pencil
+                          Mark as Refund

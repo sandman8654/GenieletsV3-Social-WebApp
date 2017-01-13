@@ -1,0 +1,23 @@
+.sign-in, .sign-up, .forgot-password, .send-confirmation {
+  border-top: 1px dotted #EEEEEE;
+  display: block;
+}
+
+.box-register, .box-forgot {
+  display: block !important;
+}
+
+#error_explanation {
+  h2 {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+
+  ul {
+    margin-bottom: 0px;
+  }
+}
+
+#signup-type {
+  text-align: center;
+}

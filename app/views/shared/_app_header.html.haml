@@ -1,0 +1,29 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.clip-list-2
+      = link_to dashboard_path, class: 'navbar-brand' do
+        = image_tag 'logo-backend.png'
+    .navbar-tools
+      %ul.nav.navbar-right
+        %li.dropdown.current-user
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            = image_tag current_user.avatar.url(:thumb), class: 'circle-img'
+            %span.username #{current_user.name} #{current_user.subscription_type if landlord?}
+            %i.clip-chevron-down
+          %ul.dropdown-menu
+            - if landlord?
+              %li
+                = link_to account_summary_path do
+                  %i.clip-calendar
+                  \&nbsp;Account Summary
+            %li
+              = link_to profile_path do
+                %i.clip-user-2
+                \&nbsp;Edit Profile
+            %li.divider
+            %li
+              = link_to destroy_user_session_path, method: :delete do
+                %i.clip-exit
+                \&nbsp;Log Out

@@ -1,0 +1,327 @@
+.row
+  .col-sm-12
+    .page-header
+      %h1
+        Dashboard
+        %small overview &amp; stats
+
+.row
+  .col-sm-12
+    .row.space12
+      %ul.mini-stats.col-sm-12
+        %li.col-sm-3
+          .values
+            %strong
+              %span.badge.badge-info
+                = link_to @properties.count, properties_path
+            %span.text-info Total Properties
+        %li.col-sm-3
+          .values
+            %strong
+              %span.badge.badge-warning
+                = link_to @contracts.count, contracts_path
+            %span.text-info Active Contracts
+        %li.col-sm-3
+          .values
+            %strong
+              %span.badge.badge-success
+                = link_to @monthly_paid[@current_month - 1][3] || 0, payments_paid_path
+            %span.text-info # of Payments Collected for the Month
+        %li.col-sm-3
+          .values
+            %strong
+              %span.badge.badge-danger
+                = link_to @outstanding_payments.count, payments_outstanding_path
+            %span.text-info # of Payment Uncollected for the Month
+
+.row
+  .col-sm-9
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-external-link-square
+        Rent Collection Trend
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-expand{:href => "#"}
+            %i.fa.fa-resize-full
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body
+        %strong Paid Rents
+        .flot-small-container
+          #paidPlots.flot-placeholder
+        %br
+        %strong Unpaid Rents
+        .flot-small-container
+          #unpaidPlots.flot-placeholder
+        %br
+        %br
+        %em
+          Note: Computed based on
+          %b Date Paid
+          , if a rent for March is paid advanced on January, it will be computed as earning on January because it was collected on January
+  .col-sm-3
+    .panel.panel-default
+      .panel-heading
+        %i.clip-pie
+        Totals
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body
+        .table-responsive
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Month
+                %th Paid
+                %th Unpaid
+            %tbody
+              - 12.times do |index|
+                %tr
+                  %td= @monthly_paid[index][0]
+                  %td= @monthly_paid[index][1]
+                  %td= @monthly_outstanding[index][1]
+
+        %br
+        .text-right
+          %h4
+            %strong.pull-right GBP #{ decimal_amount(@year_paid_total) }
+            %br
+            %small Total Paid Rents
+            .clearfix
+          %h4
+            %strong.pull-right GBP #{ decimal_amount(@year_unpaid_total) }
+            %br
+            %small Total Unpaid Rents
+
+.row
+  .col-sm-7
+    .panel.panel-default
+      .panel-heading
+        %i.clip-users-2
+        Paid Rents This Month
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body.panel-scroll{:style => "height:300px"}
+        %table#sample-table-1.table.table-striped.table-hover
+          %thead
+            %tr
+              %th #{inverse_user_type} Name
+              %th Due date
+              %th Date Paid
+              %th Amount
+              %th Status
+          %tbody
+            - for p in @month_paid
+              %tr
+                - if landlord?
+                  %td= p.contract.tenant_info(current_user)[:name]
+                - elsif tenant?
+                  %td= p.contract.landlord.name
+                %td= p.due_date
+                %td= p.date_paid
+                %td= p.precise_amount
+                %td= p.status
+        %br
+        %br
+        .text-right
+          %h4
+            %strong.pull-right GBP #{ @month_paid.map(&:amount).reduce(&:+) }
+            %br
+            %small Total Paid Rents for #{ Date.today.strftime("%b %Y") }
+            .clearfix
+  .col-sm-5
+    .panel.panel-default
+      .panel-heading
+        %i.clip-users-2
+        Unpaid Rents This Month
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body.panel-scroll{:style => "height:300px"}
+        %table#sample-table-1.table.table-striped.table-hover
+          %thead
+            %tr
+              %th #{inverse_user_type} Name
+              %th Due date
+              %th Amount
+              %th Status
+          %tbody
+            - for p in @month_unpaid
+              %tr
+                - if landlord?
+                  %td= p.contract.tenant_info(current_user)[:name]
+                - elsif tenant?
+                  %td= p.contract.landlord.name
+                %td= p.due_date
+                %td= p.precise_amount
+                %td= p.status
+        %br
+          %br
+          .text-right
+            %h4
+              %strong.pull-right GBP #{ @month_unpaid.map(&:amount).reduce(&:+) || 0 }
+              %br
+              %small Total Unpaid Rents for #{ Date.today.strftime("%b %Y") }
+              .clearfix
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      - if landlord?
+        .panel-heading
+          %i.clip-users-2
+          New contracts starting this month
+          .panel-tools
+            %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+            %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+              %i.fa.fa-times
+        .panel-body.panel-scroll{:style => "height:300px"}
+          %table#sample-table-1.table.table-striped.table-hover
+            %thead
+              %tr
+                %th #{inverse_user_type} Name
+                %th Property / Room #
+                %th Rent
+            %tbody
+              - for c in @contracts.started_this_month
+                %tr
+                  %td= c.tenant_info(current_user)[:name]
+                  %td= "#{c.property.name} / #{c.room_number}"
+                  %td= c.rental_amount
+      - elsif tenant?
+        .panel-heading
+          %i.clip-users-2
+          Payments awaiting approval
+          .panel-tools
+            %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+            %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+              %i.fa.fa-times
+        .panel-body.panel-scroll{:style => "height:300px"}
+          %table#sample-table-1.table.table-striped.table-hover
+            %thead
+              %tr
+                %th Property / Room #
+                %th Amount
+                %th Date Paid
+            %tbody
+              - for c in @awaiting_payments
+                %tr
+                  %td= "#{c.property.name} / #{c.contract.room_number}"
+                  %td= c.precise_amount
+                  %td= c.date_paid
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %i.clip-users-2
+        Contracts ending this month
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+          %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+            %i.fa.fa-times
+      .panel-body.panel-scroll{:style => "height:300px"}
+        %table#sample-table-1.table.table-striped.table-hover
+          %thead
+            %tr
+              %th #{inverse_user_type} Name
+              %th Property / Room #
+              %th Rent
+          %tbody
+            - for c in @contracts.finished_this_month
+              %tr
+                - if landlord?
+                  %td= c.tenant_info(current_user)[:name]
+                - elsif tenant?
+                  %td= c.landlord.name
+                %td= "#{c.property.name} / #{c.room_number}"
+                %td= c.rental_amount
+
+:javascript
+  var Dashboard = function () {
+    var runRentCollection = function() {
+      var data_category = #{@monthly_paid};
+      $.plot("#paidPlots", [data_category], {
+        series: {
+          bars: {
+            show: true,
+            barWidth: 0.6,
+            align: "center",
+            fillColor: "#4DBEF4",
+            lineWidth: 0
+          }
+        },
+        xaxis: {
+          mode: "categories",
+          tickLength: 0
+        },
+        grid: { hoverable: true, clickable: true }
+      });
+
+      var data_category = #{@monthly_outstanding};
+      $.plot("#unpaidPlots", [data_category], {
+        series: {
+          bars: {
+            show: true,
+            barWidth: 0.6,
+            align: "center",
+            fillColor: "#4DBEF4",
+            lineWidth: 0
+          }
+        },
+        xaxis: {
+          mode: "categories",
+          tickLength: 0
+        },
+        grid: { hoverable: true, clickable: true }
+      });
+    };
+    return {
+      init: function () {
+        runRentCollection();
+      }
+    };
+  }();
+
+  $(document).ready(function() {
+    Dashboard.init();
+
+    var changeTooltipPosition = function(event) {
+      var tooltipX = event.pageX - 8;
+      var tooltipY = event.pageY + 8;
+      $('div.tooltip').css({top: tooltipY, left: tooltipX});
+    };
+
+    var showTooltip = function(event) {
+      $('div.tooltip').remove();
+      $('<div class="tooltip">I\' am tooltips! tooltips! tooltips! :)</div>')
+            .appendTo('body');
+      changeTooltipPosition(event);
+    };
+
+    $("#paidPlots, #unpaidPlots").bind("plotclick", function (event, pos, item) {
+      $("#tooltip").remove();
+      if (item) {
+        var tooltip = item.series.data[item.dataIndex][2];
+
+        $('<div id="tooltip">' + tooltip + '</div>')
+          .css({
+            position: 'absolute',
+            display: 'none',
+            top: item.pageY + 5,
+            left: item.pageX + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80 })
+          .appendTo("body").fadeIn(200);
+
+
+        showTooltip(item.pageX, item.pageY, tooltip);
+      }
+    });
+  });

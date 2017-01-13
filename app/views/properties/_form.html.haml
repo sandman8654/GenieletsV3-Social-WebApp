@@ -1,0 +1,77 @@
+.row
+  .col-sm-12
+    = render 'shared/messages'
+  = form_for @property, class: 'form-horizontal' do |f|
+    .col-sm-12
+      = render partial: 'shared/form_errors', locals: {model: f.object}
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-external-link-square
+          PROPERTY INFO
+          .panel-tools
+            %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+            %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+              %i.fa.fa-times
+        .panel-body
+          .form-group
+            = f.label :name, 'Property Name', class: 'control-label'
+            = f.text_field :name, :placeholder => "Property Name", class: 'form-control'
+          .form-group
+            = f.label :property_type, 'Property Type', class: 'control-label'
+            = f.select :property_type, Property::PROPERTY_TYPES, {}, { class: 'form-control' }
+          .form-group
+            = f.label :room_count, 'Room Count', class: 'control-label'
+            = f.number_field :room_count, :placeholder => "Room Count", class: 'form-control'
+          .form-group
+            = f.label :rental, 'Rental Price', class: 'control-label'
+            = f.number_field :rental, :placeholder => "Rental Price", class: 'form-control', step: :any
+          .form-group
+            = f.label :address1, 'Address Line 1', class: 'control-label'
+            = f.text_field :address1, :placeholder => "Address Line 1", class: 'form-control'
+          .form-group
+            = f.label :notes, 'Notes', class: 'control-label'
+            = f.text_area :notes, :placeholder => "Notes", rows: 6, class: 'form-control'
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-external-link-square
+          ADDRESS / CONTACT INFO
+          .panel-tools
+            %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href => "#"}
+            %a.btn.btn-xs.btn-link.panel-close{:href => "#"}
+              %i.fa.fa-times
+        .panel-body
+          .form-group
+            = f.label :address2, 'Address Line 2', class: 'control-label'
+            = f.text_field :address2, :placeholder => "Address Line 2", class: 'form-control'
+          .form-group
+            = f.label :address3, 'Address Line 3', class: 'control-label'
+            = f.text_field :address3, :placeholder => "Address Line 3", class: 'form-control'
+          .form-group
+            = f.label :city, 'City / Town', class: 'control-label'
+            = f.text_field :city, :placeholder => "City / Town", class: 'form-control'
+          .form-group
+            = f.label :state, 'Region / County / State', class: 'control-label'
+            = f.text_field :state, :placeholder => "Region / County / State", class: 'form-control'
+          .form-group
+            = f.label :country, 'Country', class: 'control-label'
+            = country_select :property, :country, ["United Kingdom", "United States", "France", "Germany"], {}, {selected: 'GB', class: 'form-control'}
+          .form-group
+            = f.label :postcode, 'Postcode', class: 'control-label'
+            = f.text_field :postcode, :placeholder => "Postcode", class: 'form-control'
+          .form-group
+            %label.control-label{:for => 'property-phone'}
+              Phone
+              %small.text-warning (999) 999-9999
+            .input-group
+              %span.input-group-addon
+                %i.fa.fa-phone
+              = f.text_field :phone, class: 'form-control input-mask-phone', id: 'primary-phone'
+      .row
+        .col-sm-3.col-sm-offset-9
+          - if @property.new_record?
+            = f.submit 'Add Property', class: 'btn btn-primary pull-right'
+          - else
+            = f.submit 'Update Property', class: 'btn btn-bricky pull-right'
+      %br

@@ -1,0 +1,3 @@
+- if resource.errors.full_messages.count  > 0
+  .errorHandler.alert.alert-danger
+    = devise_error_messages!
